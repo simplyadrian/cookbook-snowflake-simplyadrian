@@ -5,7 +5,7 @@ This file is used to list changes made in each version of the snowflake-nativex 
 
 0.1.0
 -----
-- [your_name] - Initial release of snowflake-nativex
+- [Adrian Herrera] - Initial release of snowflake-nativex
 
 - - -
 Check the [Markdown Syntax Guide](http://daringfireball.net/projects/markdown/syntax) for help with Markdown.
