@@ -1,5 +1,5 @@
 name             'snowflake-nativex'
-Maintainer       'NativeX'
+maintainer       'NativeX'
 maintainer_email 'adrian.herrera@nativex.com'
 license          'All rights reserved'
 description      'Installs/Configures snowflake-nativex'
