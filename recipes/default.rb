@@ -7,18 +7,31 @@
 # All rights reserved - Do Not Redistribute
 #
 
- git "#{Chef::Config[:file_cache_path]}/ruby-build" do
-   repository "git://github.com/sstephenson/ruby-build.git"
-   reference "master"
-   action :sync
- end
+node['snowflake-nativex']['snowflake_git_dependencies'].each do |depend_build|
+  git "#{Chef::Config[:file_cache_path]}/#{depend_build[:name]}"  do
+    repository depend_build[:url]
+    repository depend_build[:branch]
+    depth depend_build[:depth]
+    action :sync
+  end
+  bash "build_snowflake" do
+    cwd "#{Chef::Config[:file_cache_path]}/#{depend_build[:name]}"
+    code <<-EOH
+      mvn clean install
+      EOH
+  end
+end
 
- bash "install_ruby_build" do
-   cwd "#{Chef::Config[:file_cache_path]}/ruby-build"
-   user "rbenv"
-   group "rbenv"
-   code <<-EOH
-     ./install.sh
-     EOH
-   environment 'PREFIX' => "/usr/local"
+git "#{Chef::Config[:file_cache_path]}/#{node['snowflake-nativex']['nativex_snowflake_project_name']}" do
+  repository node['snowflake-nativex']['snowflake_git_repository_url']
+  revision node['snowflake-nativex']['snowflake_git_repository_branch']
+  action :sync
+  notifies :run, "bash[compile_snowflake_project]"
+end
+
+bash "compile_snowflake_project" do
+  cwd "#{Chef::Config[:file_cache_path]}/#{node['snowflake-nativex']['nativex_snowflake_project_name']}"
+  code <<-EOH
+    mvn clean package
+    EOH
 end
