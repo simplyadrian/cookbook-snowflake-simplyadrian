@@ -6,7 +6,7 @@ default['snowflake-nativex']['snowflake_git_dependencies'] = [{:name => 'twitter
 													          {:name => 'apache-scribe-client-overrides',
 													          :url => 'git://github.com:nativex/apache-scribe-client-overrides.git',
 													          :branch => 'master',
-													          :depth => 1]
+													          :depth => 1}]
 # The NativeX snowflake project name
 default['snowflake-nativex']['nativex_snowflake_project_name'] = 'snowflake'
 # The snowflake git repository url
