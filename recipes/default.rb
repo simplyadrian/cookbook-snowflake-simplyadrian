@@ -10,7 +10,7 @@
 node['snowflake-nativex']['snowflake_git_dependencies'].each do |depend_build|
   git "#{Chef::Config[:file_cache_path]}/#{depend_build[:name]}"  do
     repository depend_build[:url]
-    repository depend_build[:branch]
+    revision depend_build[:branch]
     depth depend_build[:depth]
     action :sync
   end
@@ -25,6 +25,7 @@ end
 git "#{Chef::Config[:file_cache_path]}/#{node['snowflake-nativex']['nativex_snowflake_project_name']}" do
   repository node['snowflake-nativex']['snowflake_git_repository_url']
   revision node['snowflake-nativex']['snowflake_git_repository_branch']
+  depth node['snowflake-nativex']['snowflake_git_clone_depth']
   action :sync
   notifies :run, "bash[compile_snowflake_project]"
 end
