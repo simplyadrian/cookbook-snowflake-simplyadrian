@@ -20,10 +20,8 @@ default['snowflake-nativex']['ssh']['home'] = '/root/.ssh'
 # The user that owns the ssh keys.
 default['snowflake-nativex']['ssh']['user'] = 'root'
 # The group that owns the ssh key.
-default['snowflake-nativex']['ssh']['user'] = 'root'
+default['snowflake-nativex']['ssh']['group'] = 'root'
 # The destination directory where the snowflake project will live after being compiled.
 default['snowflake-nativex']['link']['destination_directory'] = '/usr/local'
 # The snowflake project environment home directory
 default['snowflake-nativex']['snowflake_home'] = '/usr/local/snowflake'
-# The snowflake project options (example)
-#default['snowflake-nativex']['snowflakerc']['opts'] = '-Dsnowflake.repo.local=$HOME/ -Xmx384m -XX:MaxPermSize=192m'

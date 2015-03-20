@@ -7,6 +7,11 @@
 # All rights reserved - Do Not Redistribute
 #
 
+include_recipe 'maven'
+node.default['maven']['version'] = "3"
+node.default['maven']['setup_bin'] = true
+node.default['maven']['install_java'] = false
+
 # Istantiate encrypted data bag
 creds = Chef::EncryptedDataBagItem.load('credentials', 'github_chef_user_private_key')
 

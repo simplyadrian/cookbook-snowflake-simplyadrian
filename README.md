@@ -44,7 +44,14 @@ Attributes
     <td><tt>['snowflake-nativex']['snowflake_git_dependencies']</tt></td>
     <td>Array</td>
     <td>An array of hashes describing the dependencies and what to do with them.</td>
-    <td><tt>[]</tt></td>
+    <td><tt>[{:name => 'twitter-scala-parent-overrides',
+              :uri => 'git@github.com:nativex/twitter-scala-parent-overrides.git',
+              :branch => 'master',
+              :depth => 1},
+            {:name => 'apache-scribe-client-overrides',
+              :uri => 'git@github.com:nativex/apache-scribe-client-overrides.git',
+              :branch => 'master',
+              :depth => 1}]</tt></td>
   </tr>
   <tr>
     <td><tt>['snowflake-nativex']['nativex_snowflake_project_name']</tt></td>
