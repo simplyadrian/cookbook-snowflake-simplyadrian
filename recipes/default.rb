@@ -38,13 +38,15 @@ node['snowflake-nativex']['snowflake_git_dependencies'].each do |build|
     depth build[:depth]
     action :sync
     ssh_wrapper "#{Chef::Config[:file_cache_path]}/git_wrapper.sh"
+    notifies :run, "bash[install_snowflake_dependencies]"
   end
   bash "install_snowflake_dependencies" do
   cwd "#{Chef::Config[:file_cache_path]}/#{build[:name]}"
   code <<-EOH
     mvn clean install
     EOH
-    not_if { ::File.directory?("#{Chef::Config[:file_cache_path]}/#{build[:name]}/target")}
+    #not_if { ::File.directory?("#{Chef::Config[:file_cache_path]}/#{build[:name]}/target")}
+    action :nothing
   end
 end
 
@@ -64,7 +66,8 @@ bash "compile_snowflake_project" do
   code <<-EOH
     mvn clean package
     EOH
-    not_if { ::File.directory?("#{Chef::Config[:file_cache_path]}/#{node['snowflake-nativex']['nativex_snowflake_project_name']}/target")}
+    #not_if { ::File.directory?("#{Chef::Config[:file_cache_path]}/#{node['snowflake-nativex']['nativex_snowflake_project_name']}/target")}
+    action :nothing
 end
 
 # Link compiled snowflake project to /usr/local/snowflake
