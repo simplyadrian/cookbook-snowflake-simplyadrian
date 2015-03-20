@@ -27,7 +27,7 @@ end
 # Create ssh wraper for github.com authentication
 file "#{Chef::Config[:file_cache_path]}/git_wrapper.sh" do
   mode 00755
-  content "#!/bin/sh\nexec /usr/bin/ssh -i #{node['snowflake-nativex']['ssh']['home']}/id_rsa \"$@\""
+  content "#!/bin/sh\nexec /usr/bin/ssh -o 'StrictHostKeyChecking=no' \"$@\""
 end
 
 # Clone the snowflake dependencies locally and compile and install
@@ -37,6 +37,7 @@ node['snowflake-nativex']['snowflake_git_dependencies'].each do |build|
     revision build[:branch]
     depth build[:depth]
     action :sync
+    ssh_wrapper "#{Chef::Config[:file_cache_path]}/git_wrapper.sh"
   end
   bash "install_snowflake_dependencies" do
   cwd "#{Chef::Config[:file_cache_path]}/#{build[:name]}"
@@ -53,6 +54,7 @@ git "#{Chef::Config[:file_cache_path]}/#{node['snowflake-nativex']['nativex_snow
   revision node['snowflake-nativex']['snowflake_git_repository_branch']
   depth node['snowflake-nativex']['snowflake_git_clone_depth']
   action :sync
+  ssh_wrapper "#{Chef::Config[:file_cache_path]}/git_wrapper.sh"
   notifies :run, "bash[compile_snowflake_project]"
 end
 
