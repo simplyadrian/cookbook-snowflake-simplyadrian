@@ -15,3 +15,11 @@ default['snowflake-nativex']['snowflake_git_repository_url'] = 'git@github.com:n
 default['snowflake-nativex']['snowflake_git_repository_branch'] = 'master'
 # The depth you want to which you want to clone the snowflake project.
 default['snowflake-nativex']['snowflake_git_clone_depth'] = 1
+# The operations home directory where github.com authentication will be setup
+default['snowflake-nativex']['ssh']['home'] = '/root/.ssh/'
+# The user that owns the ssh keys.
+default['snowflake-nativex']['ssh']['user'] = 'root'
+# The group that owns the ssh key.
+default['snowflake-nativex']['ssh']['user'] = 'root'
+# The destination directory where the snowflake project will live after being compiled.
+default['snowflake-nativex']['destination_directory'] = '/usr/local/'
