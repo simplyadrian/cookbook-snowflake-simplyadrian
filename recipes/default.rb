@@ -65,8 +65,7 @@ end
 # Link compiled snowflake project to /usr/local/snowflake
 bash "link_snowflake_project" do
   code <<-EOH
-    ln -s "#{Chef::Config['file_cache_path']}/#{node['snowflake-nativex']['nativex_snowflake_project_name']}"
-    "#{node['snowflake-nativex']['destination_directory']}/#{node['snowflake-nativex']['nativex_snowflake_project_name']}"
+    ln -s "#{Chef::Config['file_cache_path']}/#{node['snowflake-nativex']['nativex_snowflake_project_name']}" "#{node['snowflake-nativex']['destination_directory']}/#{node['snowflake-nativex']['nativex_snowflake_project_name']}"
     EOH
     not_if { ::File.directory?("#{node['snowflake-nativex']['destination_directory']}/#{node['snowflake-nativex']['nativex_snowflake_project_name']}") }
 end
