@@ -28,7 +28,7 @@ end
 # Clone the snowflake dependencies locally and compile and install
 node['snowflake-nativex']['snowflake_git_dependencies'].each do |build|
   git "#{Chef::Config[:file_cache_path]}/#{build[:name]}"  do
-    repository build[:url]
+    repository build[:uri]
     revision build[:branch]
     depth build[:depth]
     action :sync
@@ -45,7 +45,7 @@ end
 
 # Clone the snowflake project and notify the compile function to package the snowflake project.
 git "#{Chef::Config[:file_cache_path]}/#{node['snowflake-nativex']['nativex_snowflake_project_name']}" do
-  repository node['snowflake-nativex']['snowflake_git_repository_url']
+  repository node['snowflake-nativex']['snowflake_git_repository_uri']
   revision node['snowflake-nativex']['snowflake_git_repository_branch']
   depth node['snowflake-nativex']['snowflake_git_clone_depth']
   action :sync
@@ -66,9 +66,9 @@ end
 bash "link_snowflake_project" do
   code <<-EOH
     ln -s "#{Chef::Config['file_cache_path']}/#{node['snowflake-nativex']['nativex_snowflake_project_name']}" \
-    "#{node['snowflake-nativex']['destination_directory']}/#{node['snowflake-nativex']['nativex_snowflake_project_name']}"
+    "#{node['snowflake-nativex']['link']['destination_directory']}/#{node['snowflake-nativex']['nativex_snowflake_project_name']}"
     EOH
-    not_if { ::File.directory?("#{node['snowflake-nativex']['destination_directory']}/#{node['snowflake-nativex']['nativex_snowflake_project_name']}") }
+    not_if { ::File.directory?("#{node['snowflake-nativex']['link']['destination_directory']}/#{node['snowflake-nativex']['nativex_snowflake_project_name']}") }
 end
 
 # Create environment file for snowflake
