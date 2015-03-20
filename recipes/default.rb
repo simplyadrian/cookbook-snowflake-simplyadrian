@@ -39,6 +39,7 @@ node['snowflake-nativex']['snowflake_git_dependencies'].each do |build|
   code <<-EOH
     mvn clean install
     EOH
+    not_if { ::File.directory?("#{Chef::Config[:file_cache_path]}/#{build[:name]}/target")}
   end
 end
 
@@ -65,7 +66,7 @@ end
 bash "link_snowflake_project" do
   code <<-EOH
     ln -s "#{Chef::Config['file_cache_path']}/#{node['snowflake-nativex']['nativex_snowflake_project_name']}"
-    "#{node['snowflake-nativex']['destination_directory']}/"
+    "#{node['snowflake-nativex']['destination_directory']}/#{node['snowflake-nativex']['nativex_snowflake_project_name']}"
     EOH
     not_if { ::File.directory?("#{node['snowflake-nativex']['destination_directory']}/#{node['snowflake-nativex']['nativex_snowflake_project_name']}") }
 end
