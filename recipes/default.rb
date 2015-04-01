@@ -12,22 +12,10 @@ node.default['maven']['version'] = "3"
 node.default['maven']['setup_bin'] = true
 node.default['maven']['install_java'] = false
 
-# Istantiate encrypted data bag
-creds = Chef::EncryptedDataBagItem.load('credentials', 'github_chef_user_private_key')
-
-# Store private key on disk
-file "#{node['snowflake-nativex']['ssh']['home']}/id_rsa" do
-  content "#{creds['priv']}"
-  owner node['snowflake-nativex']['ssh']['user']
-  group node['snowflake-nativex']['ssh']['group']
-  mode 00600
-  action :create_if_missing
-end
-
 # Create ssh wraper for github.com authentication
 file "#{Chef::Config[:file_cache_path]}/git_wrapper.sh" do
   mode 00755
-  content "#!/bin/sh\nexec /usr/bin/ssh -o 'StrictHostKeyChecking=no' \"$@\""
+  content "#!/bin/sh\nexec /usr/bin/ssh -i #{node['role-base-nativex']['ssh']['home']}/git_nativex -o 'StrictHostKeyChecking=no' \"$@\""
 end
 
 # Clone the snowflake dependencies locally and compile and install
