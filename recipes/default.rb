@@ -7,6 +7,7 @@
 # All rights reserved - Do Not Redistribute
 #
 
+include_recipe 'role-base-nativex::git_auth'
 include_recipe 'maven'
 node.default['maven']['version'] = "3"
 node.default['maven']['setup_bin'] = true
@@ -15,7 +16,7 @@ node.default['maven']['install_java'] = false
 # Create ssh wraper for github.com authentication
 file "#{Chef::Config[:file_cache_path]}/git_wrapper.sh" do
   mode 00755
-  content "#!/bin/sh\nexec /usr/bin/ssh -i #{node['role-base-nativex']['ssh']['home']}/git_nativex -o 'StrictHostKeyChecking=no' \"$@\""
+  content "#!/bin/sh\nexec /usr/bin/ssh -i #{node['role-base-nativex']['ssh']['home']}/#{node['role-base-nativex']['ssh']['key_name']} -o 'StrictHostKeyChecking=no' \"$@\""
 end
 
 # Clone the snowflake dependencies locally and compile and install
