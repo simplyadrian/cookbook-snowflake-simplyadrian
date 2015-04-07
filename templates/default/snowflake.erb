@@ -1,14 +1,14 @@
 #!/bin/sh
-APP_NAME=<%= "#{node['snowflake-nativex']['nativex_snowflake_project_name']}" %>
-MAIN_JAR=<%= "#{node['snowflake-nativex']['main_jar']}" %>
-APP_HOME=<%= "#{node['snowflake-nativex']['snowflake_home']}" %>
-MAIN_CLASS=<%= "#{node['snowflake-nativex']['main-class']}" %>
+APP_NAME=<%= node['snowflake-nativex']['nativex_snowflake_project_name'] %>
+MAIN_JAR=<%= node['snowflake-nativex']['main_jar'] %>
+APP_HOME=<%= node['snowflake-nativex']['snowflake_home'] %>
+MAIN_CLASS=<%= node['snowflake-nativex']['main-class'] %>
 
-HEAP_OPTS=<%= "#{node['snowflake-nativex']['heap_opts']}" %>
-JMX_OPTS=<%= "#{node['snowflake-nativex']['jmx_opts']}" %>
-GC_OPTS=<%= "#{node['snowflake-nativex']['gc_opts']}" %>
-DEBUG_OPTS=<%= "#{node['snowflake-nativex']['debug_opts']}" %>
-JAVA_OPTS=<%= "#{node['snowflake-nativex']['java_opts']}" %>
+HEAP_OPTS=<%= node['snowflake-nativex']['heap_opts'] %>
+JMX_OPTS=<%= node['snowflake-nativex']['jmx_opts'] %>
+GC_OPTS=<%= node['snowflake-nativex']['gc_opts'] %>
+DEBUG_OPTS=<%= node['snowflake-nativex']['debug_opts'] %>
+JAVA_OPTS=<%= node['snowflake-nativex']['java_opts'] %>
 
 PID_PATH_NAME="/var/run/$APP_NAME.pid"
 
