@@ -66,7 +66,7 @@ bash "link_snowflake_project" do
 end
 
 # Create environment file for snowflake
-template '/etc/snowflakerc' do
-  source 'snowflakerc.erb'
+template '/etc/init.d/snowflake' do
+  source 'snowflake.erb'
   mode   '0755'
 end
