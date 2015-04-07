@@ -1,0 +1,52 @@
+#!/bin/sh
+APP_NAME=<%= node['snowflake-nativex']['nativex_snowflake_project_name'] %>
+MAIN_JAR=<%= node['snowflake-nativex']['main_jar'] %>
+APP_HOME=<%= node['snowflake-nativex']['snowflake_home'] %>
+MAIN_CLASS=<%= node['snowflake-nativex']['main-class'] %>
+
+HEAP_OPTS=<%= node['snowflake-nativex']['heap_opts'] %>
+JMX_OPTS=<%= node['snowflake-nativex']['jmx_opts'] %>
+GC_OPTS=<%= node['snowflake-nativex']['gc_opts'] %>
+DEBUG_OPTS=<%= node['snowflake-nativex']['debug_opts'] %>
+JAVA_OPTS=<%= node['snowflake-nativex']['java_opts'] %>
+
+PID_PATH_NAME="/var/run/$APP_NAME.pid"
+
+case $1 in
+    start)
+        echo "Starting $APP_NAME ..."
+        if [ ! -f $PID_PATH_NAME ]; then
+            nohup java ${JAVA_OPTS} -cp ${APP_HOME}/${MAIN_JAR} ${MAIN_CLASS} -f ${APP_HOME}/config/config.scala /tmp 2>> /dev/null >> /dev/null &
+                        echo $! > $PID_PATH_NAME
+            echo "$APP_NAME started ..."
+        else
+            echo "$APP_NAME is already running ..."
+        fi
+    ;;
+    stop)
+        if [ -f $PID_PATH_NAME ]; then
+            PID=$(cat $PID_PATH_NAME);
+            echo "$APP_NAME stoping ..."
+            kill $PID;
+            echo "$APP_NAME stopped ..."
+            rm $PID_PATH_NAME
+        else
+            echo "$APP_NAME is not running ..."
+        fi
+    ;;
+    restart)
+        if [ -f $PID_PATH_NAME ]; then
+            PID=$(cat $PID_PATH_NAME);
+            echo "$APP_NAME stopping ...";
+            kill $PID;
+            echo "$APP_NAME stopped ...";
+            rm $PID_PATH_NAME
+            echo "$APP_NAME starting ..."
+            nohup java ${JAVA_OPTS} -cp ${APP_HOME}/${MAIN_JAR} ${MAIN_CLASS} -f ${APP_HOME}/config/config.scala /tmp 2>> /dev/null >> /dev/null &
+                        echo $! > $PID_PATH_NAME
+            echo "$APP_NAME started ..."
+        else
+            echo "$APP_NAME is not running ..."
+        fi
+    ;;
+esac 
