@@ -14,3 +14,4 @@ node.default['maven']['install_java'] = false
 
 include_recipe 'snowflake-nativex::git_build'
 include_recipe 'snowflake-nativex::configure'
+include_recipe 'snowflake-nativex::add_to_elb'

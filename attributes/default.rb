@@ -4,8 +4,10 @@ default['snowflake-nativex']['app']['nativex_snowflake_project_name'] = 'snowfla
 default['snowflake-nativex']['app']['snowflake_home'] = '/usr/local/snowflake'
 # Snowflake datacetnerID ##TODO make this dynamic with an LWRP.
 default['snowflake-nativex']['app']['datacenterId'] = 1
-#Snowflake logging directory and file name.
+# Snowflake logging directory and file name.
 default['snowflake-nativex']['app']['snowflake_log'] = "/var/log/snowflake.log"
+# ELB name ##TODO make this a dynamic attribute but set it here while developing.
+default['snowflake-nativex']['elb']['name'] = "DAW1AL-flakeELB"
 # An array of project names, uris and their branches need to build the NativeX snowflake project 
 default['snowflake-nativex']['git']['snowflake_git_dependencies'] = [{:name => 'twitter-scala-parent-overrides',
 													          :uri => 'git@github.com:nativex/twitter-scala-parent-overrides.git',
