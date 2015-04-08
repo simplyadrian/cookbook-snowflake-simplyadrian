@@ -20,7 +20,7 @@ file "#{Chef::Config[:file_cache_path]}/git_wrapper.sh" do
 end
 
 # Clone the snowflake dependencies locally and compile and install
-node['snowflake-nativex']['snowflake_git_dependencies'].each do |build|
+node['snowflake-nativex']['git']['snowflake_git_dependencies'].each do |build|
   git "#{Chef::Config[:file_cache_path]}/#{build[:name]}"  do
     repository build[:uri]
     revision build[:branch]
@@ -38,10 +38,10 @@ node['snowflake-nativex']['snowflake_git_dependencies'].each do |build|
 end
 
 # Clone the snowflake project and notify the compile function to package the snowflake project.
-git "#{Chef::Config[:file_cache_path]}/#{node['snowflake-nativex']['nativex_snowflake_project_name']}" do
-  repository node['snowflake-nativex']['snowflake_git_repository_uri']
-  revision node['snowflake-nativex']['snowflake_git_repository_branch']
-  depth node['snowflake-nativex']['snowflake_git_clone_depth']
+git "#{Chef::Config[:file_cache_path]}/#{node['snowflake-nativex']['app']['nativex_snowflake_project_name']}" do
+  repository node['snowflake-nativex']['git']['snowflake_git_repository_uri']
+  revision node['snowflake-nativex']['git']['snowflake_git_repository_branch']
+  depth node['snowflake-nativex']['git']['snowflake_git_clone_depth']
   action :sync
   ssh_wrapper "#{Chef::Config[:file_cache_path]}/git_wrapper.sh"
   notifies :run, "bash[compile_snowflake_project]"
@@ -49,7 +49,7 @@ end
 
 # Bash function to compile the snowflake project.
 bash "compile_snowflake_project" do
-  cwd "#{Chef::Config[:file_cache_path]}/#{node['snowflake-nativex']['nativex_snowflake_project_name']}"
+  cwd "#{Chef::Config[:file_cache_path]}/#{node['snowflake-nativex']['app']['nativex_snowflake_project_name']}"
   code <<-EOH
     mvn clean package
     EOH
@@ -59,10 +59,10 @@ end
 # Link compiled snowflake project to /usr/local/snowflake
 bash "link_snowflake_project" do
   code <<-EOH
-    ln -s "#{Chef::Config['file_cache_path']}/#{node['snowflake-nativex']['nativex_snowflake_project_name']}" \
-    "#{node['snowflake-nativex']['link']['destination_directory']}/#{node['snowflake-nativex']['nativex_snowflake_project_name']}"
+    ln -s "#{Chef::Config['file_cache_path']}/#{node['snowflake-nativex']['app']['nativex_snowflake_project_name']}" \
+    "#{node['snowflake-nativex']['link']['destination_directory']}/#{node['snowflake-nativex']['app']['nativex_snowflake_project_name']}"
     EOH
-    not_if { ::File.directory?("#{node['snowflake-nativex']['link']['destination_directory']}/#{node['snowflake-nativex']['nativex_snowflake_project_name']}") }
+    not_if { ::File.directory?("#{node['snowflake-nativex']['link']['destination_directory']}/#{node['snowflake-nativex']['app']['nativex_snowflake_project_name']}") }
 end
 
 # Create environment file for snowflake

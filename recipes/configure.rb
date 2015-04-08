@@ -8,7 +8,7 @@
 #
 
 # Create environment file for snowflake
-template "#{node['snowflake-nativex']['snowflake_home']}/config/config.scala" do
+template "#{node['snowflake-nativex']['app']['snowflake_home']}/config/config.scala" do
   source 'config.scala.erb'
   mode   '0755'
 end

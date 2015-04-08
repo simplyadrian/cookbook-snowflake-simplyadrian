@@ -1,5 +1,13 @@
+# The NativeX snowflake project name
+default['snowflake-nativex']['app']['nativex_snowflake_project_name'] = 'snowflake'
+# The snowflake project environment home directory
+default['snowflake-nativex']['app']['snowflake_home'] = '/usr/local/snowflake'
+# Snowflake datacetnerID ##TODO make this dynamic with an LWRP.
+default['snowflake-nativex']['app']['datacenterId'] = 1
+#Snowflake logging directory and file name.
+default['snowflake-nativex']['app']['snowflake_log'] = "/var/log/snowflake.log"
 # An array of project names, uris and their branches need to build the NativeX snowflake project 
-default['snowflake-nativex']['snowflake_git_dependencies'] = [{:name => 'twitter-scala-parent-overrides',
+default['snowflake-nativex']['git']['snowflake_git_dependencies'] = [{:name => 'twitter-scala-parent-overrides',
 													          :uri => 'git@github.com:nativex/twitter-scala-parent-overrides.git',
 													          :branch => 'master',
 													          :depth => 1},
@@ -7,35 +15,27 @@ default['snowflake-nativex']['snowflake_git_dependencies'] = [{:name => 'twitter
 													          :uri => 'git@github.com:nativex/apache-scribe-client-overrides.git',
 													          :branch => 'master',
 													          :depth => 1}]
-# The NativeX snowflake project name
-default['snowflake-nativex']['nativex_snowflake_project_name'] = 'snowflake'
 # The snowflake git repository uri
-default['snowflake-nativex']['snowflake_git_repository_uri'] = 'git@github.com:nativex/snowflake.git'
+default['snowflake-nativex']['git']['snowflake_git_repository_uri'] = 'git@github.com:nativex/snowflake.git'
 # The snowflake revision or branch you want to checkout.
-default['snowflake-nativex']['snowflake_git_repository_branch'] = 'master'
+default['snowflake-nativex']['git']['snowflake_git_repository_branch'] = 'master'
 # The depth you want to which you want to clone the snowflake project.
-default['snowflake-nativex']['snowflake_git_clone_depth'] = 1
+default['snowflake-nativex']['git']['snowflake_git_clone_depth'] = 1
+# The snowflake project main jar file.
+default['snowflake-nativex']['java']['main_jar'] = '"/target/snowflake-1.0.1-SNAPSHOT.jar"'
+# The snowflake class search path of directories and zip/jar files
+default['snowflake-nativex']['java']['main-class'] = '"com.twitter.service.snowflake.SnowflakeServer"'
+# Java heap options for the snowflake application.
+default['snowflake-nativex']['java']['heap_opts'] = '"-Xmx700m -Xms700m -Xmn500m"'
+# Java JMX optiosn for the snowflake application.
+default['snowflake-nativex']['java']['jmx_opts'] = '"-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=9999 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false"'
+# Java garbage collection settings for the snowflake application.
+default['snowflake-nativex']['java']['gc_opts'] = '"-XX:+UseConcMarkSweepGC -verbosegc -XX:+PrintGCDetails -XX:+PrintGCTimeStamps -XX:+PrintGCDateStamps -XX:+UseParNewGC -Xloggc:/var/log/snowflake/gc.log"'
+# Java debug options for the snow application.
+default['snowflake-nativex']['java']['debug_opts'] = '"-XX:ErrorFile=/var/log/$APP_NAME/java_error%p.log"'
+# The complete Java options being passed to the snowflake application.
+default['snowflake-nativex']['java']['java_opts'] = '"-server $GC_OPTS $JMX_OPTS $HEAP_OPTS $DEBUG_OPTS"'
 # The destination directory where the snowflake project will live after being compiled.
 default['snowflake-nativex']['link']['destination_directory'] = '/usr/local'
-# The snowflake project environment home directory
-default['snowflake-nativex']['snowflake_home'] = '/usr/local/snowflake'
-# The snowflake project main jar file.
-default['snowflake-nativex']['main_jar'] = '"/target/snowflake-1.0.1-SNAPSHOT.jar"'
-# The snowflake class search path of directories and zip/jar files
-default['snowflake-nativex']['main-class'] = '"com.twitter.service.snowflake.SnowflakeServer"'
-# Snowflake datacetnerID ##TODO make this dynamic with an LWRP.
-default['snowflake-nativex']['datacenterId'] = 1
-#Snowflake logging directory and file name.
-default['snowflake-nativex']['snowflake_log'] = "/var/log/snowflake.log"
-# Java heap options for the snowflake application.
-default['snowflake-nativex']['heap_opts'] = '"-Xmx700m -Xms700m -Xmn500m"'
-# Java JMX optiosn for the snowflake application.
-default['snowflake-nativex']['jmx_opts'] = '"-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=9999 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false"'
-# Java garbage collection settings for the snowflake application.
-default['snowflake-nativex']['gc_opts'] = '"-XX:+UseConcMarkSweepGC -verbosegc -XX:+PrintGCDetails -XX:+PrintGCTimeStamps -XX:+PrintGCDateStamps -XX:+UseParNewGC -Xloggc:/var/log/snowflake/gc.log"'
-# Java debug options for the snow application.
-default['snowflake-nativex']['debug_opts'] = '"-XX:ErrorFile=/var/log/$APP_NAME/java_error%p.log"'
-# The complete Java options being passed to the snowflake application.
-default['snowflake-nativex']['java_opts'] = '"-server $GC_OPTS $JMX_OPTS $HEAP_OPTS $DEBUG_OPTS"'
 # Zookeeper hosts lists. ##TODO Make this dynamic with an LWRP. *zookeeper cookbook dependency
-default['snowflake-nativex']['zookeeper_hostlists'] = "pchdvl-zookpr01.teamfreeze.com,pchdvl-zookpr02.teamfreeze.com,pchdvl-zookpr03.teamfreeze.com"
+default['snowflake-nativex']['zookeeper']['host_list'] = '"pchdvl-zookpr01.teamfreeze.com,pchdvl-zookpr02.teamfreeze.com,pchdvl-zookpr03.teamfreeze.com"'
