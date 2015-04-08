@@ -1,4 +1,13 @@
 #!/bin/sh
+#
+# snowflake    Init script for snowflake
+#
+# chkconfig: 345 99 01
+# processname: snowflake
+# pidfile: var/run/snowflake.pid
+# description: Starts and Stops and restarts snowflake process.
+#
+
 APP_NAME=<%= node['snowflake-nativex']['app']['nativex_snowflake_project_name'] %>
 
 MAIN_JAR=<%= node['snowflake-nativex']['java']['main_jar'] %>
