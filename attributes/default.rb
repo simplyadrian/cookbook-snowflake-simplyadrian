@@ -23,6 +23,10 @@ default['snowflake-nativex']['snowflake_home'] = '/usr/local/snowflake'
 default['snowflake-nativex']['main_jar'] = '"/target/snowflake-1.0.1-SNAPSHOT.jar"'
 # The snowflake class search path of directories and zip/jar files
 default['snowflake-nativex']['main-class'] = '"com.twitter.service.snowflake.SnowflakeServer"'
+# Snowflake datacetnerID ##TODO make this dynamic with an LWRP.
+default['snowflake-nativex']['datacenterId'] = 1
+#Snowflake logging directory and file name.
+default['snowflake-nativex']['snowflake_log'] = "/var/log/snowflake.log"
 # Java heap options for the snowflake application.
 default['snowflake-nativex']['heap_opts'] = '"-Xmx700m -Xms700m -Xmn500m"'
 # Java JMX optiosn for the snowflake application.
@@ -33,3 +37,5 @@ default['snowflake-nativex']['gc_opts'] = '"-XX:+UseConcMarkSweepGC -verbosegc -
 default['snowflake-nativex']['debug_opts'] = '"-XX:ErrorFile=/var/log/$APP_NAME/java_error%p.log"'
 # The complete Java options being passed to the snowflake application.
 default['snowflake-nativex']['java_opts'] = '"-server $GC_OPTS $JMX_OPTS $HEAP_OPTS $DEBUG_OPTS"'
+# Zookeeper hosts lists. ##TODO Make this dynamic with an LWRP. *zookeeper cookbook dependency
+default['snowflake-nativex']['zookeeper_hostlists'] = "pchdvl-zookpr01.teamfreeze.com,pchdvl-zookpr02.teamfreeze.com,pchdvl-zookpr03.teamfreeze.com"

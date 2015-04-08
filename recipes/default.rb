@@ -70,3 +70,5 @@ template '/etc/init.d/snowflake' do
   source 'snowflake.erb'
   mode   '0755'
 end
+
+include_recipe 'snowflake-nativex::configure'
