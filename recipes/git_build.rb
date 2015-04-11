@@ -23,13 +23,14 @@ node['snowflake-nativex']['git']['snowflake_git_dependencies'].each do |build|
     depth build[:depth]
     action :sync
     ssh_wrapper "#{Chef::Config[:file_cache_path]}/git_wrapper.sh"
+    timeout 180
   end
   bash "install_snowflake_dependencies" do
   cwd "#{Chef::Config[:file_cache_path]}/#{build[:name]}"
   code <<-EOH
     mvn clean install -X
     EOH
-    not_if { ::File.directory?("#{Chef::Config[:file_cache_path]}/#{build[:name]}/target")}
+    not_if { ::File.directory?("#{Chef::Config[:file_cache_path]}/#{build[:name]}/target")}, :timeout => 180
   end
 end
 
@@ -40,6 +41,7 @@ git "#{Chef::Config[:file_cache_path]}/#{node['snowflake-nativex']['app']['nativ
   depth node['snowflake-nativex']['git']['snowflake_git_clone_depth']
   action :sync
   ssh_wrapper "#{Chef::Config[:file_cache_path]}/git_wrapper.sh"
+  timeout 180
   notifies :run, "bash[compile_snowflake_project]"
 end
 
@@ -50,4 +52,5 @@ bash "compile_snowflake_project" do
     mvn clean package -X
     EOH
     action :nothing
+    not_if "sleep 180", :timeout => 180
 end
