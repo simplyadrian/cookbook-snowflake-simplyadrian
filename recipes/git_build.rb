@@ -30,7 +30,7 @@ node['snowflake-nativex']['git']['snowflake_git_dependencies'].each do |build|
   code <<-EOH
     mvn clean install -X
     EOH
-    not_if { ::File.directory?("#{Chef::Config[:file_cache_path]}/#{build[:name]}/target")}, :timeout => 180
+    not_if { ::File.directory?("#{Chef::Config[:file_cache_path]}/#{build[:name]}/target")}
   end
 end
 
@@ -52,5 +52,4 @@ bash "compile_snowflake_project" do
     mvn clean package -X
     EOH
     action :nothing
-    not_if "sleep 180", :timeout => 180
 end
