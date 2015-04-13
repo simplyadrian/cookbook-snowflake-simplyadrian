@@ -12,5 +12,6 @@ node.default['maven']['version'] = "3"
 node.default['maven']['setup_bin'] = true
 node.default['maven']['install_java'] = false
 
+include_recipe 'snowflake-nativex::remote_file_build'
 include_recipe 'snowflake-nativex::configure'
 include_recipe 'snowflake-nativex::add_to_elb'
