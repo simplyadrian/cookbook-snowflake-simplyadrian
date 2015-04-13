@@ -22,5 +22,4 @@ ark "#{node['snowflake-nativex']['app']['nativex_snowflake_project_name']}" do
   url 'https://s3-us-west-2.amazonaws.com/archive-code-nativex/snowflake.tgz'
   path "#{Chef::Config[:file_cache_path]}"
   action :install
-  notifies :run, "bash[compile_snowflake_project]"
 end
