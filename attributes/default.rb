@@ -39,5 +39,10 @@ default['snowflake-nativex']['java']['debug_opts'] = '"-XX:ErrorFile=/var/log/$A
 default['snowflake-nativex']['java']['java_opts'] = '"-server $GC_OPTS $JMX_OPTS $HEAP_OPTS $DEBUG_OPTS"'
 # The destination directory where the snowflake project will live after being compiled.
 default['snowflake-nativex']['link']['destination_directory'] = '/usr/local'
+# List of tarballs for installing snowflake from archive.
+default['snowflake-nativex']['dependency_tarball'] = [{:name => 'twitter-scala-parent-overrides',
+									:url => 'https://s3-us-west-2.amazonaws.com/archive-code-nativex/twitter-scala-parent-overrides.tgz'},
+								    {:name => 'apache-scribe-client-overrides',
+								    :url => 'https://s3-us-west-2.amazonaws.com/archive-code-nativex/apache-scribe-client-overrides.tgz'}]
 # Zookeeper hosts lists. ##TODO Make this dynamic with an LWRP. *zookeeper cookbook dependency
 default['snowflake-nativex']['zookeeper']['host_list'] = '"pchdvl-zookpr01.teamfreeze.com,pchdvl-zookpr02.teamfreeze.com,pchdvl-zookpr03.teamfreeze.com"'

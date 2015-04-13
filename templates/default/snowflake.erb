@@ -18,6 +18,7 @@ JMX_OPTS=<%= node['snowflake-nativex']['java']['jmx_opts'] %>
 GC_OPTS=<%= node['snowflake-nativex']['java']['gc_opts'] %>
 DEBUG_OPTS=<%= node['snowflake-nativex']['java']['debug_opts'] %>
 JAVA_OPTS=<%= node['snowflake-nativex']['java']['java_opts'] %>
+CLASSPATH_OPT="$APP_HOME/lib/*:$APP_HOME/$MAIN_JAR"
 
 PID_PATH_NAME="/var/run/$APP_NAME.pid"
 
@@ -25,7 +26,7 @@ case $1 in
     start)
         echo "Starting $APP_NAME ..."
         if [ ! -f $PID_PATH_NAME ]; then
-            nohup java ${JAVA_OPTS} -cp ${APP_HOME}/${MAIN_JAR} ${MAIN_CLASS} -f ${APP_HOME}/config/config.scala /tmp 2>> /dev/null >> /dev/null &
+            nohup java ${JAVA_OPTS} -cp ${CLASSPATH_OPT} ${MAIN_CLASS} -f ${APP_HOME}/config/config.scala /tmp 2>> /dev/null >> /dev/null &
                         echo $! > $PID_PATH_NAME
             echo "$APP_NAME started ..."
         else
@@ -51,7 +52,7 @@ case $1 in
             echo "$APP_NAME stopped ...";
             rm $PID_PATH_NAME
             echo "$APP_NAME starting ..."
-            nohup java ${JAVA_OPTS} -cp ${APP_HOME}/${MAIN_JAR} ${MAIN_CLASS} -f ${APP_HOME}/config/config.scala /tmp 2>> /dev/null >> /dev/null &
+            nohup java ${JAVA_OPTS} -cp ${CLASSPATH_OPT} ${MAIN_CLASS} -f ${APP_HOME}/config/config.scala /tmp 2>> /dev/null >> /dev/null &
                         echo $! > $PID_PATH_NAME
             echo "$APP_NAME started ..."
         else
