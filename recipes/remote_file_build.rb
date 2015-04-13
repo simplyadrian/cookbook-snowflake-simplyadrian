@@ -8,8 +8,9 @@
 #
 
 
+# Download the dependency archives locally and unpack them.
 node['snowflake-nativex']['dependency_tarball'].each do |build|
-  ark "#{Chef::Config[:file_cache_path]}/#{build[:name]}"  do
+  ark "#{build[:name]}"  do
     url "#{build[:url]}"
     path "#{Chef::Config[:file_cache_path]}"
     action :put
@@ -22,7 +23,8 @@ node['snowflake-nativex']['dependency_tarball'].each do |build|
   end
 end
 
-ark "#{Chef::Config[:file_cache_path]}/#{node['snowflake-nativex']['app']['nativex_snowflake_project_name']}" do
+# Download the snowflake project archive locally and unpack it.
+ark "#{node['snowflake-nativex']['app']['nativex_snowflake_project_name']}" do
   url 'https://s3-us-west-2.amazonaws.com/archive-code-nativex/snowflake.tgz'
   path "#{Chef::Config[:file_cache_path]}"
   action :install
