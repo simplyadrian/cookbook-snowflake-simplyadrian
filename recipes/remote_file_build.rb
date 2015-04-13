@@ -7,27 +7,25 @@
 # All rights reserved - Do Not Redistribute
 #
 
-node['snowflake-nativex']['tarballs'].each do |build|
+
+node['snowflake-nativex']['dependency_tarball'].each do |build|
   ark "#{Chef::Config[:file_cache_path]}/#{build[:name]}"  do
     url "#{build[:url]}"
     path "#{Chef::Config[:file_cache_path]}"
-    action :install
+    action :put
+  end
+  bash "install_snowflake_dependencies" do
+    cwd "#{Chef::Config[:file_cache_path]}/#{build[:name]}"
+    code <<-EOH
+      mvn clean install -X
+    EOH
   end
 end
 
-bash "install_snowflake_dependencies" do
-  cwd "#{Chef::Config[:file_cache_path]}/#{build[:name]}"
-  code <<-EOH
-    mvn clean install -X
-    EOH
-end
-
-
-remote_file "#{Chef::Config[:file_cache_path]}/#{node['snowflake-nativex']['app']['nativex_snowflake_project_name']}" do
-  source 'https://s3-us-west-2.amazonaws.com/archive-code-nativex/snowflake.tgz'
-  owner "root"
-  group "root"
-  mode "0644"
+ark "#{Chef::Config[:file_cache_path]}/#{node['snowflake-nativex']['app']['nativex_snowflake_project_name']}" do
+  url 'https://s3-us-west-2.amazonaws.com/archive-code-nativex/snowflake.tgz'
+  path "#{Chef::Config[:file_cache_path]}"
+  action :install
   notifies :run, "bash[compile_snowflake_project]"
 end
 
