@@ -18,7 +18,7 @@ node['snowflake-nativex']['dependency_tarball'].each do |build|
   bash "install_snowflake_dependencies" do
     cwd "#{Chef::Config[:file_cache_path]}/#{build[:name]}"
     code <<-EOH
-      mvn clean install -X
+      mvn install -X
     EOH
   end
 end
@@ -35,7 +35,7 @@ end
 bash "compile_snowflake_project" do
   cwd "#{Chef::Config[:file_cache_path]}/#{node['snowflake-nativex']['app']['nativex_snowflake_project_name']}"
   code <<-EOH
-    mvn clean package -X
+    mvn package -X
     EOH
     action :nothing
 end
