@@ -8,8 +8,6 @@
 # description: Starts and Stops and restarts snowflake process.
 #
 
-java -server -XX:+UseConcMarkSweepGC -verbosegc -XX:+PrintGCDetails -XX:+PrintGCTimeStamps -XX:+PrintGCDateStamps -XX:+UseParNewGC -Xloggc:/var/log/snowflake/gc.log -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=9999 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Xmx700m -Xms700m -Xmn500m -XX:ErrorFile=/var/log/snowflake/java_error%p.log -cp /usr/local/snowflake/target/lib/*:/usr/local/snowflake/target/snowflake-1.0.1-SNAPSHOT.jar com.twitter.service.snowflake.SnowflakeServer -f /usr/local/snowflake/config/config.scala
-
 APP_NAME="<%= node['snowflake-nativex']['app']['nativex_snowflake_project_name'] %>"
 APP_HOME="<%= node['snowflake-nativex']['app']['snowflake_home'] %>"
 
@@ -29,8 +27,8 @@ case $1 in
     start)
         echo "Starting $APP_NAME ..."
         if [ ! -f $PID_PATH_NAME ]; then
-            nohup java ${JAVA_OPTS} -cp ${CLASSPATH_OPT} ${MAIN_CLASS} -f ${APP_HOME}/config/config.scala /tmp 2>> /dev/null >> /dev/null &
-                        echo $! > $PID_PATH_NAME
+            java ${JAVA_OPTS} -cp ${CLASSPATH_OPT} ${MAIN_CLASS} -f ${APP_HOME}/config/config.scala >> /path/to/logfile 2>&1 &
+                    echo $! > $PID_PATH_NAME
             echo "$APP_NAME started ..."
         else
             echo "$APP_NAME is already running ..."
@@ -55,8 +53,8 @@ case $1 in
             echo "$APP_NAME stopped ...";
             rm $PID_PATH_NAME
             echo "$APP_NAME starting ..."
-            nohup java ${JAVA_OPTS} -cp ${CLASSPATH_OPT} ${MAIN_CLASS} -f ${APP_HOME}/config/config.scala /tmp 2>> /dev/null >> /dev/null &
-                        echo $! > $PID_PATH_NAME
+            java ${JAVA_OPTS} -cp ${CLASSPATH_OPT} ${MAIN_CLASS} -f ${APP_HOME}/config/config.scala >> /path/to/logfile 2>&1 &
+                    echo $! > $PID_PATH_NAME
             echo "$APP_NAME started ..."
         else
             echo "$APP_NAME is not running ..."
