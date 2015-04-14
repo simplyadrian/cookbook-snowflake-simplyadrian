@@ -5,12 +5,14 @@ default['snowflake-nativex']['app']['snowflake_home'] = '/usr/local/snowflake'
 # Snowflake datacetnerID ##TODO make this dynamic with an LWRP.
 default['snowflake-nativex']['app']['datacenterId'] = 1
 # Snowflake logging directory and file name.
-default['snowflake-nativex']['app']['snowflake_log'] = "/var/log/snowflake.log"
+default['snowflake-nativex']['app']['snowflake_log'] = '"snowflake.log"'
 # List of tarballs for installing snowflake from archive.
 default['snowflake-nativex']['dependency_tarball'] = [{:name => 'twitter-scala-parent-overrides',
 												:url => 'https://s3-us-west-2.amazonaws.com/archive-code-nativex/twitter-scala-parent-overrides.tgz'},
 								    			{:name => 'apache-scribe-client-overrides',
-								    			:url => 'https://s3-us-west-2.amazonaws.com/archive-code-nativex/apache-scribe-client-overrides.tgz'}]
+								    			:url => 'https://s3-us-west-2.amazonaws.com/archive-code-nativex/apache-scribe-client-overrides.tgz'},
+								    			{:name => 'snowflake',
+								    			:url => 'https://s3-us-west-2.amazonaws.com/archive-code-nativex/snowflake.tgz'}]
 # ELB name ##TODO make this a dynamic attribute but set it here while developing.
 default['snowflake-nativex']['elb']['name'] = "DAW1AL-flakeELB"
 # An array of project names, uris and their branches need to build the NativeX snowflake project 
