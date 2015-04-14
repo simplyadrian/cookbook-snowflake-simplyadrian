@@ -31,7 +31,7 @@ default['snowflake-nativex']['git']['snowflake_git_repository_branch'] = 'master
 # The depth you want to which you want to clone the snowflake project.
 default['snowflake-nativex']['git']['snowflake_git_clone_depth'] = 1
 # The snowflake project main jar file.
-default['snowflake-nativex']['java']['main_jar'] = '/target/snowflake-1.0.1-SNAPSHOT.jar'
+default['snowflake-nativex']['java']['main_jar'] = 'snowflake-1.0.1-SNAPSHOT.jar'
 # The snowflake class search path of directories and zip/jar files
 default['snowflake-nativex']['java']['main-class'] = 'com.twitter.service.snowflake.SnowflakeServer'
 # Java heap options for the snowflake application.
