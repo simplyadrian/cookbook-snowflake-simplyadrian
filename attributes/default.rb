@@ -1,3 +1,5 @@
+# Snowflake install method. Currently supports 'archive' and 'source'.
+default['snowflake-nativexsnow']['install_method'] = 'archive'
 # The NativeX snowflake project name
 default['snowflake-nativex']['app']['nativex_snowflake_project_name'] = 'snowflake'
 # The snowflake project environment home directory
