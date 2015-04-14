@@ -8,16 +8,17 @@
 # description: Starts and Stops and restarts snowflake process.
 #
 
-APP_NAME="<%= node['snowflake-nativex']['app']['nativex_snowflake_project_name'] %>""
-
-MAIN_JAR="<%= node['snowflake-nativex']['java']['main_jar'] %>"
+APP_NAME="<%= node['snowflake-nativex']['app']['nativex_snowflake_project_name'] %>"
 APP_HOME="<%= node['snowflake-nativex']['app']['snowflake_home'] %>"
-MAIN_CLASS="<%= node['snowflake-nativex']['java']['main-class'] %>"
-HEAP_OPTS="<%= node['snowflake-nativex']['java']['heap_opts'] %>"
-JMX_OPTS="<%= node['snowflake-nativex']['java']['jmx_opts'] %>"
-GC_OPTS="<%= node['snowflake-nativex']['java']['gc_opts'] %>"
+
 DEBUG_OPTS="<%= node['snowflake-nativex']['java']['debug_opts'] %>"
+GC_OPTS="<%= node['snowflake-nativex']['java']['gc_opts'] %>"
+HEAP_OPTS="<%= node['snowflake-nativex']['java']['heap_opts'] %>"
 JAVA_OPTS="<%= node['snowflake-nativex']['java']['java_opts'] %>"
+JMX_OPTS="<%= node['snowflake-nativex']['java']['jmx_opts'] %>"
+MAIN_CLASS="<%= node['snowflake-nativex']['java']['main-class'] %>"
+MAIN_JAR="<%= node['snowflake-nativex']['java']['main_jar'] %>"
+
 CLASSPATH_OPT="$APP_HOME/lib/*:$APP_HOME/$MAIN_JAR"
 
 PID_PATH_NAME="/var/run/$APP_NAME.pid"
