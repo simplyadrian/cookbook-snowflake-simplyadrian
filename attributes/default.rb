@@ -3,7 +3,7 @@ default['snowflake-nativex']['app']['nativex_snowflake_project_name'] = 'snowfla
 # The snowflake project environment home directory
 default['snowflake-nativex']['app']['snowflake_home'] = '/usr/local/snowflake'
 # Snowflake datacetnerID ##TODO make this dynamic with an LWRP.
-default['snowflake-nativex']['app']['datacenterId'] = 1
+default['snowflake-nativex']['app']['datacenterId'] = 7
 # Snowflake logging directory and file name.
 default['snowflake-nativex']['app']['snowflake_log'] = 'snowflake.log'
 # List of tarballs for installing snowflake from archive.
