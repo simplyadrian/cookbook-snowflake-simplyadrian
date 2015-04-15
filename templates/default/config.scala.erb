@@ -8,7 +8,7 @@ import com.twitter.ostrich.admin.config.AdminServiceConfig
 new SnowflakeConfig {
   serverPort = 7609
   datacenterId = <%= node['snowflake-nativex']['app']['datacenterId'] %>
-  workerIdMap = Map(<%= workerIdMap %> -> InetAddress.getLocalHost.getHostName)
+  workerIdMap = Map(<%= node['snowflake-nativex']['app']['map_id'] %> -> InetAddress.getLocalHost.getHostName)
   workerIdZkPath = "<%= "/snowflake-servers-dc#{node['snowflake-nativex']['app']['datacenterId']}" %>"
   skipSanityChecks = true
   startupSleepMs = 10000
