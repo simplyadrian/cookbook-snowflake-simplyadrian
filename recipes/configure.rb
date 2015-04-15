@@ -24,6 +24,7 @@ end
 
 # Create environment file for snowflake
 template "#{node['snowflake-nativex']['app']['snowflake_home']}/config/config.scala" do
+  helpers (SnowflakeNativex::Helper)
   source 'config.scala.erb'
   mode   '0755'
   notifies :restart, 'service[snowflake]'
