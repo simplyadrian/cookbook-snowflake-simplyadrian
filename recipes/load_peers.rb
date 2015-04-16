@@ -19,10 +19,10 @@ if node['snowflake']['peer_search_enabled']
     end
   end
 
-  peers = SnowflakeNativex::Helper.peers found_nodes
+  peers = SnowflakeNativex::Helper.get_workerid_integer_and_increment found_nodes
   peers.flatten!
   peers.sort!{ |a,b| a['id'] <=> b['id'] }
 
-  node.default['snowflake']['map_id'] = peers
+  node.default['snowflake']['peers'] = peers
 
 end

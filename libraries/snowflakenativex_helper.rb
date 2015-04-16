@@ -7,31 +7,19 @@
 # All rights reserved - Do Not Redistribute
 #
 
-class Chef
-  module SnowflakeNativex
-    module Helper
-      class << self
+module SnowflakeNativex
+  module Helper
+  
+    def get_workerid_integer_and_increment( node )
+      Chef::Log.debug("Parsing node to provide key value pairs.")
 
-        def peers(nodes)
-          nodes = [nodes] if nodes.class == Chef::Node
-          nodes.map{ |node| node_to_peer(node) }
-        end
+      workerIdMap = []
 
-        def node_to_peer(node)
-          unless node['snowflake-nativex']['app']['datacenterId'].nil?
-            snowflakeDatacenterID = [ node['snowflake-nativex']['app']['datacenterId'] ]
-          else
-            snowflakeDatacenterID = node['snowflake-nativex']['app']['datacenterId']
-          end
-
-          snowflakeDatacenterID.to_a.map.with_index do |snowflakeDatacenterID, i|
-            { 'snowflakeDatacenterID'  => snowflakeDatacenterID,
-              'workerIdMap' => i + node['snowflake']['map_id'].to_i    
-            }
-          end
-        end
-
+      workerIdMap << node['snowflake']['map_id'].succ
       end
+
+    Chef::Log.debug("The integer being used equals #{workerIdMap.length}")
+    return workerIdMap
     end
   end
 end

@@ -13,6 +13,8 @@ default['snowflake']['install_method'] = 'archive'
 default['snowflake']['map_id'] = 0
 # The NativeX snowflake project name
 default['snowflake']['application_name'] = 'snowflake'
+# Other peers
+default['snowflake']['peers'] = []
 # If enabled the snowflake peers will be loaded into an array.
 default['snowflake']['peer_search_enabled'] = true
 # The knfe search command that will be performed to find the other snowflake nodes.
