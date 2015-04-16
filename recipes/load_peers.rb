@@ -7,7 +7,7 @@
 # All rights reserved - Do Not Redistribute
 #
 
-if node['snowflake-nativex']['app']['peer_search_enabled']
+if node['snowflake']['peer_search_enabled']
 
   found_nodes = []
   if Chef::Config[:solo]
