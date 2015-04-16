@@ -1,26 +1,30 @@
-# Snowflake install method. Currently supports 'archive' and 'source'.
-default['snowflake-nativexsnow']['install_method'] = 'archive'
-# The NativeX snowflake project name
-default['snowflake-nativex']['app']['nativex_snowflake_project_name'] = 'snowflake'
-# The snowflake project environment home directory
-default['snowflake-nativex']['app']['snowflake_home'] = '/usr/local/snowflake'
 # Snowflake datacetnerID ##TODO make this dynamic with an LWRP.
-default['snowflake-nativex']['app']['datacenterId'] = 7
-# Snowflake map id 0..31 ##TODO make this dynamic with an LWRP
-default['snowflake-nativex']['app']['map_id'] = 0
-# Snowflake logging directory and file name.
-default['snowflake-nativex']['app']['snowflake_log'] = 'snowflake.log'
+default['snowflake']['datacenterId'] = 7
 # List of tarballs for installing snowflake from archive.
-default['snowflake-nativex']['dependency_tarball'] = [{:name => 'twitter-scala-parent-overrides',
+default['snowflake']['archive'] = [{:name => 'twitter-scala-parent-overrides',
 												:url => 'https://s3-us-west-2.amazonaws.com/archive-code-nativex/twitter-scala-parent-overrides.tgz'},
 								    			{:name => 'apache-scribe-client-overrides',
 								    			:url => 'https://s3-us-west-2.amazonaws.com/archive-code-nativex/apache-scribe-client-overrides.tgz'},
 								    			{:name => 'snowflake',
 								    			:url => 'https://s3-us-west-2.amazonaws.com/archive-code-nativex/snowflake.tgz'}]
+# Snowflake install method. Currently supports 'archive' and 'source'.
+default['snowflake']['install_method'] = 'archive'
+# Snowflake map id 0..31 ##TODO make this dynamic with an LWRP
+default['snowflake']['map_id'] = 0
+# The NativeX snowflake project name
+default['snowflake']['application_name'] = 'snowflake'
+# If enabled the snowflake peers will be loaded into an array.
+default['snowflake']['peer_search_enabled'] = true
+# The knfe search command that will be performed to find the other snowflake nodes.
+default['snowflake']['peer_search_query'] = "chef_environment:#{node.chef_environment} AND snowflake_map_id:*"
+# The snowflake project environment home directory
+default['snowflake']['snowflake_home'] = '/usr/local/snowflake'
+# Snowflake logging directory and file name.
+default['snowflake']['snowflake_log'] = 'snowflake.log'
 # ELB name ##TODO make this a dynamic attribute but set it here while developing.
 default['snowflake-nativex']['elb']['name'] = "DAW1AL-flakeELB"
 # An array of project names, uris and their branches need to build the NativeX snowflake project 
-default['snowflake-nativex']['git']['snowflake_git_dependencies'] = [{:name => 'twitter-scala-parent-overrides',
+default['snowflake-nativex']['git']['snowflake_git_dependency'] = [{:name => 'twitter-scala-parent-overrides',
 													          :uri => 'git@github.com:nativex/twitter-scala-parent-overrides.git',
 													          :branch => 'master',
 													          :depth => 1},
@@ -50,9 +54,5 @@ default['snowflake-nativex']['java']['debug_opts'] = '-XX:ErrorFile=/var/log/$AP
 default['snowflake-nativex']['java']['java_opts'] = '-server $GC_OPTS $JMX_OPTS $HEAP_OPTS $DEBUG_OPTS'
 # The destination directory where the snowflake project will live after being compiled.
 default['snowflake-nativex']['link']['destination_directory'] = '/usr/local'
-# If enabled the snowflake peers will be loaded into an array.
-default['snowflake-nativex']['peer_search_enabled'] = true
-# The knfe search command that will be performed to find the other snowflake nodes.
-default['snowflake-nativex']['peer_search_query'] = "chef_environment:#{node.chef_environment} AND helper_snowflakeDatacenterID:*"
 # Zookeeper hosts lists. ##TODO Make this dynamic with an LWRP. *zookeeper cookbook dependency
 default['snowflake-nativex']['zookeeper']['host_list'] = 'pchdvl-zookpr01.teamfreeze.com,pchdvl-zookpr02.teamfreeze.com,pchdvl-zookpr03.teamfreeze.com'

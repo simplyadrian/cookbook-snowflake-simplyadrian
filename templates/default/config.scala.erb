@@ -7,9 +7,9 @@ import com.twitter.ostrich.admin.config.AdminServiceConfig
 
 new SnowflakeConfig {
   serverPort = 7609
-  datacenterId = <%= node['snowflake-nativex']['app']['datacenterId'] %>
-  workerIdMap = Map(<%= node['snowflake-nativex']['app']['map_id'] %> -> InetAddress.getLocalHost.getHostName)
-  workerIdZkPath = "<%= "/snowflake-servers-dc#{node['snowflake-nativex']['app']['datacenterId']}" %>"
+  datacenterId = <%= node['snowflake']['datacenterId'] %>
+  workerIdMap = Map(<%= node['snowflake']['map_id'] %> -> InetAddress.getLocalHost.getHostName)
+  workerIdZkPath = "<%= "/snowflake-servers-dc#{node['snowflake']['datacenterId']}" %>"
   skipSanityChecks = true
   startupSleepMs = 10000
   thriftServerThreads = 2
@@ -33,7 +33,7 @@ new SnowflakeConfig {
   loggers = new LoggerConfig {
     handlers = new FileHandlerConfig {
       level = Level.TRACE
-      filename = "<%= node['snowflake-nativex']['app']['snowflake_log'] %>"
+      filename = "<%= node['snowflake']['snowflake_log'] %>"
     }
   }
 }

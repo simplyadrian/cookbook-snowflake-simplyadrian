@@ -26,7 +26,7 @@ class Chef
 
           snowflakeDatacenterID.to_a.map.with_index do |snowflakeDatacenterID, i|
             { 'snowflakeDatacenterID'  => snowflakeDatacenterID,
-              'workerIdMap' => i + node['snowflake-nativex']['app']['map_id'].to_i    
+              'workerIdMap' => i + node['snowflake']['map_id'].to_i    
             }
           end
         end

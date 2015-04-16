@@ -7,15 +7,15 @@
 # All rights reserved - Do Not Redistribute
 #
 
-if node['snowflake-nativex']['peer_search_enabled']
+if node['snowflake-nativex']['app']['peer_search_enabled']
 
   found_nodes = []
   if Chef::Config[:solo]
     log 'Chef search disabled'
   else
-    found_nodes = search 'node', node['snowflake-nativex']['peer_search_query']
+    found_nodes = search 'node', node['snowflake']['peer_search_query']
     log 'Chef search results' do
-      message "Search for \"#{node['snowflake-nativex']['peer_search_query']}\" yields \"#{found_nodes}\""
+      message "Search for \"#{node['snowflake']['peer_search_query']}\" yields \"#{found_nodes}\""
     end
   end
 
@@ -23,6 +23,6 @@ if node['snowflake-nativex']['peer_search_enabled']
   peers.flatten!
   peers.sort!{ |a,b| a['id'] <=> b['id'] }
 
-  node.default['snowflake-nativex']['app']['map_id'] = peers
+  node.default['snowflake']['map_id'] = peers
 
 end
