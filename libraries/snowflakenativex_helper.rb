@@ -16,7 +16,6 @@ module SnowflakeNativex
       workerIdMap = []
 
       workerIdMap << node['snowflake']['map_id'].succ
-      end
 
     Chef::Log.debug("The integer being used equals #{workerIdMap.length}")
     return workerIdMap
