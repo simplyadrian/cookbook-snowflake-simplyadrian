@@ -13,12 +13,6 @@ default['snowflake']['install_method'] = 'archive'
 default['snowflake']['map_id'] = 0
 # The NativeX snowflake project name
 default['snowflake']['application_name'] = 'snowflake'
-# Other peers
-default['snowflake']['peers'] = []
-# If enabled the snowflake peers will be loaded into an array.
-default['snowflake']['peer_search_enabled'] = true
-# The knfe search command that will be performed to find the other snowflake nodes.
-default['snowflake']['peer_search_query'] = "chef_environment:#{node.chef_environment} AND snowflake_map_id:*"
 # The snowflake project environment home directory
 default['snowflake']['snowflake_home'] = '/usr/local/snowflake'
 # Snowflake logging directory and file name.

@@ -12,6 +12,7 @@ node.default['maven']['version'] = "3"
 node.default['maven']['setup_bin'] = true
 node.default['maven']['install_java'] = false
 
+include_recipe 'snowflake-nativex::set_datacenterid_and_workerid'
 include_recipe 'snowflake-nativex::install'
 include_recipe 'snowflake-nativex::configure'
 include_recipe 'snowflake-nativex::load_peers'
