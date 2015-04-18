@@ -52,6 +52,7 @@ ruby_block "read the databag contents" do
         databag_item.data_bag('ids')
         databag_item.raw_data = snowflake_id
         databag_item.save
+      end
     end
   end
   action :run
