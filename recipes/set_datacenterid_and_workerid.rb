@@ -21,9 +21,9 @@ end
 ruby_block "operate on the databag contents" do
   block do
     snowflake_ids = data_bag_item('ids', 'snowflake_id')
-    worker_id = snowflake_ids['worker_id']
+    worker_id = snowflake_ids['worker_id'].to_i
     Chef::Log.info("The worker_id equals #{snowflake_ids['worker_id']}")
-    datacenterId = snowflake_ids['datacenter_id']
+    datacenterId = snowflake_ids['datacenter_id'].to_i
     Chef::Log.info("The datacenter_id equals #{snowflake_ids['datacenter_id']}")
 
     current_databag_keys = Hash.new
