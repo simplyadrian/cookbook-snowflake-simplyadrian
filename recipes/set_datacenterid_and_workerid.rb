@@ -21,9 +21,9 @@ end
 ruby_block "operate on the databag contents" do
   block do
     snowflake_ids = data_bag_item('ids', 'snowflake_id')
-    worker_id = snowflake_ids['worker_id'].to_i
+    worker_id = snowflake_ids ['worker_id']
     Chef::Log.info("The worker_id equals #{snowflake_ids['worker_id']}")
-    datacenterId = snowflake_ids['datacenter_id'].to_i
+    datacenterId = snowflake_ids['datacenter_id']
     Chef::Log.info("The datacenter_id equals #{snowflake_ids['datacenter_id']}")
 
     current_databag_keys = Hash.new
@@ -34,8 +34,8 @@ ruby_block "operate on the databag contents" do
       Chef::Log.info("#{worker_id} is greater then 31")
       if current_databag_keys.length > 0
         snowflake_id = {
-          'datacenter_id' => "#{current_databag_keys[:datacenter_id]}",
-          'worker_id' => "#{current_databag_keys[:worker_id]}"
+          'datacenter_id' => "#{current_databag_keys['datacenter_id']}",
+          'worker_id' => "#{current_databag_keys['worker_id']}"
         }
         databag_item = Chef::DataBagItem.new
         databag_item.data_bag('ids')
@@ -48,7 +48,7 @@ ruby_block "operate on the databag contents" do
       if current_databag_keys.length > 0
         snowflake_id = {
           'datacenter_id' => datacenter_id,
-          'worker_id' => "#{current_databag_keys[:worker_id]}"
+          'worker_id' => "#{current_databag_keys['worker_id']}"
         }
         databag_item = Chef::DataBagItem.new
         databag_item.data_bag('ids')
