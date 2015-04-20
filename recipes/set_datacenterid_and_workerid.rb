@@ -20,7 +20,7 @@ end
 # Read databag and update if conditions are met.
 ruby_block "operate on the databag contents" do
   block do
-    snowflake_ids = data_bag_item('ids', node.default['snowflake']['map_id'])
+    snowflake_ids = data_bag_item('ids', 'snowflake_id')
     worker_id = snowflake_ids['worker_id']
     Chef::Log.info("The worker_id equals #{snowflake_ids['worker_id']}")
     datacenterId = snowflake_ids['datacenter_id']
