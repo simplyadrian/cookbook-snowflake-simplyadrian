@@ -29,33 +29,33 @@ ruby_block "operate on the databag contents" do
     current_databag_keys = Hash.new
     Chef::Log.info("created new hash #{current_databag_keys}")
 
-    #if worker_id > 31
-    #  datacenter_id.succ && worker_id == 0 >> current_databag_keys
-    #  Chef::Log.info("#{worker_id} is greater then 31")
-    #  if current_databag_keys.length > 0
-    #    snowflake_id = {
-    #      'datacenter_id' => "#{current_databag_keys[:datacenter_id]}",
-    #      'worker_id' => "#{current_databag_keys[:worker_id]}"
-    #    }
-    #    databag_item = Chef::DataBagItem.new
-    #    databag_item.data_bag('ids')
-    #    databag_item.raw_data = snowflake_id
-    #    databag_item.save
-    #  end
-    #else
-    #  worker_id.succ >> current_databag_keys
-    #  Chef::Log.info("Incrementing #{worker_id} by 1")
-    #  if current_databag_keys.length > 0
-    #    snowflake_id = {
-    #      'datacenter_id' => datacenter_id,
-    #      'worker_id' => "#{current_databag_keys[:worker_id]}"
-    #    }
-    #    databag_item = Chef::DataBagItem.new
-    #    databag_item.data_bag('ids')
-    #    databag_item.raw_data = snowflake_id
-    #    databag_item.save
-    #  end
-    #end
+    if worker_id > 31
+      datacenter_id.succ && worker_id == 0 >> current_databag_keys
+      Chef::Log.info("#{worker_id} is greater then 31")
+      if current_databag_keys.length > 0
+        snowflake_id = {
+          'datacenter_id' => "#{current_databag_keys[:datacenter_id]}",
+          'worker_id' => "#{current_databag_keys[:worker_id]}"
+        }
+        databag_item = Chef::DataBagItem.new
+        databag_item.data_bag('ids')
+        databag_item.raw_data = snowflake_id
+        databag_item.save
+      end
+    else
+      worker_id.succ >> current_databag_keys
+      Chef::Log.info("Incrementing #{worker_id} by 1")
+      if current_databag_keys.length > 0
+        snowflake_id = {
+          'datacenter_id' => datacenter_id,
+          'worker_id' => "#{current_databag_keys[:worker_id]}"
+        }
+        databag_item = Chef::DataBagItem.new
+        databag_item.data_bag('ids')
+        databag_item.raw_data = snowflake_id
+        databag_item.save
+      end
+    end
   end
   action :run
 end
