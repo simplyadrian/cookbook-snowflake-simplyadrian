@@ -41,7 +41,7 @@ ruby_block "operate on the databag contents" do
         databag_item.data_bag('ids')
         databag_item.raw_data = snowflake_id
         databag_item.save
-      end
+      #end
     else
       #worker_id.succ >> current_databag_keys
       Chef::Log.info("Incrementing #{worker_id} by 1")
@@ -54,7 +54,7 @@ ruby_block "operate on the databag contents" do
         databag_item.data_bag('ids')
         databag_item.raw_data = snowflake_id
         databag_item.save
-      end
+      #end
     end
   end
   action :run
