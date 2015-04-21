@@ -26,8 +26,19 @@ ruby_block "operate on the databag contents" do
     datacenter_id = db['datacenter_id']
     Chef::Log.info("The datacenter_id equals #{db['datacenter_id']}")
 
-    if worker_id > 31
-      Chef::Log.info("#{worker_id} is greater then 31")
+    if datacenter_id >= 31
+      Chef::Log.info("datacenter_id is greater than 31")
+        snowflake_id = {
+          'id' => "snowflake_id",
+          'datacenter_id' => 0,
+          'worker_id' => 0
+        }
+        databag_item = Chef::DataBagItem.new
+        databag_item.data_bag('ids')
+        databag_item.raw_data = snowflake_id
+        databag_item.save
+    elsif worker_id >= 31
+      Chef::Log.info("worker_id is greater than 31")
         snowflake_id = {
           'id' => "snowflake_id",
           'datacenter_id' => datacenter_id.succ,
@@ -38,7 +49,7 @@ ruby_block "operate on the databag contents" do
         databag_item.raw_data = snowflake_id
         databag_item.save
     else
-      Chef::Log.info("Incrementing #{worker_id} by 1")
+      Chef::Log.info("Incrementing worker_id by 1")
         snowflake_id = {
           'id' => "snowflake_id",
           'datacenter_id' => datacenter_id,
