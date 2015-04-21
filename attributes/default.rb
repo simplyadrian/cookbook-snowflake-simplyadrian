@@ -1,5 +1,5 @@
 # Snowflake datacetnerID ##TODO make this dynamic with an LWRP.
-default['snowflake']['datacenterId'] = 7
+default['snowflake']['datacenterId'] = 20
 # List of tarballs for installing snowflake from archive.
 default['snowflake']['archive'] = [{:name => 'twitter-scala-parent-overrides',
 												:url => 'https://s3-us-west-2.amazonaws.com/archive-code-nativex/twitter-scala-parent-overrides.tgz'},
