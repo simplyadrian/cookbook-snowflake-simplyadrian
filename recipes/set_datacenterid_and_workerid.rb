@@ -26,7 +26,7 @@ ruby_block "operate on the databag contents" do
     datacenterId = snowflake_ids['datacenter_id']
     Chef::Log.info("The datacenter_id equals #{snowflake_ids['datacenter_id']}")
 
-    current_databag_keys = Array.new
+    current_databag_keys = Set.new
     Chef::Log.info("created new hash #{current_databag_keys}")
 
     if worker_id > 31
