@@ -29,7 +29,7 @@ ruby_block "operate on the databag contents" do
     if worker_id > 31
       Chef::Log.info("#{worker_id} is greater then 31")
         snowflake_id = {
-          'id' => "snowflake_id"
+          'id' => "snowflake_id",
           'datacenter_id' => "#{datacenter_id}".succ,
           'worker_id' => 0
         }
@@ -40,7 +40,7 @@ ruby_block "operate on the databag contents" do
     else
       Chef::Log.info("Incrementing #{worker_id} by 1")
         snowflake_id = {
-          'id' => "snowflake_id"
+          'id' => "snowflake_id",
           'datacenter_id' => "#{datacenter_id}",
           'worker_id' => "#{worker_id}".succ
         }
