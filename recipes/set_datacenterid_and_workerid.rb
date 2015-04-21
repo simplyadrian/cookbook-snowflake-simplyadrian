@@ -35,7 +35,7 @@ ruby_block "operate on the databag contents" do
       #if current_databag_keys.length > 0
         snowflake_id = {
           'datacenter_id' => datacenter_id.succ #"#{current_databag_keys['datacenter_id']}",
-          'worker_id' => 0 #"#{current_databag_keys['worker_id']}"
+          'worker_id' => '0' #"#{current_databag_keys['worker_id']}"
         }
         databag_item = Chef::DataBagItem.new
         databag_item.data_bag('ids')
