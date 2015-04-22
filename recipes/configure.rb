@@ -36,7 +36,7 @@ template "#{node['snowflake']['snowflake_home']}/config/config.scala" do
   notifies :restart, 'service[snowflake]'
 end
 
-# Instantiate snowflake service
+# Enable snowflake service
 service 'snowflake' do
 	supports :start => true, :restart => true, :stop => true
 	action [ :enable ]

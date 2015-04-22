@@ -10,6 +10,9 @@ Requirements
 - `Maven` - snowflake-nativex needs mvn in the system path to build the snowflake project.
 - `Git` - snowflake-nativex needs the git resource to download the snowflake project and its dependencies locally for the build process.
 
+#### data_bags
+This cookbook requires the data bag "ids" exists. The cookbook will create it and add the initial content if it is not created manually.
+
 * Chef 11 or higher
 
 #### Supported OS Distributions

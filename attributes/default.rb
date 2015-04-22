@@ -1,3 +1,5 @@
+# The NativeX snowflake project name
+default['snowflake']['application_name'] = 'snowflake'
 # List of tarballs for installing snowflake from archive.
 default['snowflake']['archive'] = [{:name => 'twitter-scala-parent-overrides',
 												:url => 'https://s3-us-west-2.amazonaws.com/archive-code-nativex/twitter-scala-parent-overrides.tgz'},
@@ -7,8 +9,6 @@ default['snowflake']['archive'] = [{:name => 'twitter-scala-parent-overrides',
 								    			:url => 'https://s3-us-west-2.amazonaws.com/archive-code-nativex/snowflake.tgz'}]
 # Snowflake install method. Currently supports 'archive' and 'source'.
 default['snowflake']['install_method'] = 'archive'
-# The NativeX snowflake project name
-default['snowflake']['application_name'] = 'snowflake'
 # The snowflake project environment home directory
 default['snowflake']['snowflake_home'] = '/usr/local/snowflake'
 # Snowflake logging directory and file name.

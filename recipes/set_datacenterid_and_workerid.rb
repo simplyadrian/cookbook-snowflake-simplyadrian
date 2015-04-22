@@ -15,6 +15,16 @@ unless Chef::DataBag.list.key?('ids')
   new_databag = Chef::DataBag.new
   new_databag.name('ids')
   new_databag.save
+  Chef::Log.info("create initial contents of data bag ids")
+  snowflake_id = {
+    'id' => "snowflake_id",
+    'datacenter_id' => 0,
+    'worker_id' => 0
+  }
+  databag_item = Chef::DataBagItem.new
+  databag_item.data_bag('ids')
+  databag_item.raw_data = snowflake_id
+  databag_item.save
 end
 
 # Read databag and update if conditions are met.
