@@ -1,5 +1,3 @@
-# Snowflake datacetnerID ##TODO make this dynamic with an LWRP.
-default['snowflake']['datacenterId'] = 20
 # List of tarballs for installing snowflake from archive.
 default['snowflake']['archive'] = [{:name => 'twitter-scala-parent-overrides',
 												:url => 'https://s3-us-west-2.amazonaws.com/archive-code-nativex/twitter-scala-parent-overrides.tgz'},
@@ -9,8 +7,6 @@ default['snowflake']['archive'] = [{:name => 'twitter-scala-parent-overrides',
 								    			:url => 'https://s3-us-west-2.amazonaws.com/archive-code-nativex/snowflake.tgz'}]
 # Snowflake install method. Currently supports 'archive' and 'source'.
 default['snowflake']['install_method'] = 'archive'
-# Snowflake map id 0..31 ##TODO make this dynamic with an LWRP
-default['snowflake']['map_id'] = 0
 # The NativeX snowflake project name
 default['snowflake']['application_name'] = 'snowflake'
 # The snowflake project environment home directory

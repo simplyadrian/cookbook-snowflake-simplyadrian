@@ -22,10 +22,17 @@ template '/etc/init.d/snowflake' do
   mode   '0755'
 end
 
+# instantiate the data bag item for use as a variable
+db = data_bag_item( 'ids', 'snowflake_id' )
+
 # Create environment file for snowflake
 template "#{node['snowflake']['snowflake_home']}/config/config.scala" do
   source 'config.scala.erb'
   mode   '0755'
+  variables( 
+    :datacenter_id => db['datacenter_id'],
+    :worker_id => db['worker_id']
+  )
   notifies :restart, 'service[snowflake]'
 end
 
