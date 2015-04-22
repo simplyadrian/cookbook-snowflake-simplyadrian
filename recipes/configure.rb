@@ -34,6 +34,7 @@ template "#{node['snowflake']['snowflake_home']}/config/config.scala" do
     :worker_id => db['worker_id']
   )
   notifies :restart, 'service[snowflake]'
+  not_if { node.attribute?('snowflake_configured') }
 end
 
 # Enable snowflake service
