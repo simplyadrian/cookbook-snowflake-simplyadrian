@@ -42,3 +42,10 @@ service 'snowflake' do
 	action [ :enable ]
 end
 
+ruby_block 'set_idempotence' do
+  block do
+    node.set['snowflake_configured'] = true
+    node.save
+  end
+  action :run
+end

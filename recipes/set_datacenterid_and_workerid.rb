@@ -70,6 +70,7 @@ ruby_block "operate on the databag contents" do
         databag_item.raw_data = snowflake_id
         databag_item.save
     end
+    not_if { node.attribute?('snowflake_configured') }
   end
   action :run
 end
