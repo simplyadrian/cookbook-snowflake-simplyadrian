@@ -1,14 +1,16 @@
 snowflake-nativex Cookbook
 ==========================
-This cookbook does the basic compile and install of the nativex::snowflake project according to the README located here: https://github.com/nativex/snowflake
+This cookbook does the install and configuration of the nativex::snowflake project according to the README located here: https://github.com/nativex/snowflake
 
 Requirements
 ------------
 
 #### packages
-- `java JDK` - snowflake-nativex needs a JDK to complete the build of the project.
-- `Maven` - snowflake-nativex needs mvn in the system path to build the snowflake project.
-- `Git` - snowflake-nativex needs the git resource to download the snowflake project and its dependencies locally for the build process.
+- `java JDK` - Snowflake-nativex needs a JDK to complete the build of the project.
+- `Maven` - Snowflake-nativex needs mvn in the system path to build the snowflake project.
+- `Git` - Snowflake-nativex needs the git resource to download the snowflake project and its dependencies locally for the build process.
+- `Ark` - This cookbook uses ark to download, unpack and add a archive to the system.
+- `AWS` - This cookbook needs the AWS cookbook to register a node with a ELB.
 
 #### data_bags
 This cookbook requires the data bag "ids" exists. The cookbook will create it and add the initial content if it is not created manually.
