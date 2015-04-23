@@ -7,4 +7,4 @@
 # All rights reserved - Do Not Redistribute
 #
 
-include_recipe "snowflake-nativex::snowflake_from_#{node['snowflake']['install_method']}"
+include_recipe "snowflake-nativex::snowflake_from_#{node['snowflake-nativex']['install_method']}"

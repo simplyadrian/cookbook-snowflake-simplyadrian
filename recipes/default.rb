@@ -7,13 +7,6 @@
 # All rights reserved - Do Not Redistribute
 #
 
-# Maven version
-node.default['maven']['version'] = "3"
-# Add maven to system path
-node.default['maven']['setup_bin'] = true
-# Don't install the openjdk that Maven cookbook ships
-node.default['maven']['install_java'] = true
-
 include_recipe 'maven'
 include_recipe 'snowflake-nativex::set_datacenterid_and_workerid'
 include_recipe 'snowflake-nativex::install'

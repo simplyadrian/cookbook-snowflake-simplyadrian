@@ -1,13 +1,13 @@
 #
 # Cookbook Name:: snowflake-nativex
-# Recipe:: git_build
+# Recipe:: snowflake_from_source
 #
 # Copyright 2015, NativeX
 #
 # All rights reserved - Do Not Redistribute
 #
 
-node.force_override['snowflake']['install_method'] = 'source' # ~FC019
+node.force_override['snowflake-nativex']['install_method'] = 'source' # ~FC019
 
 include_recipe 'role-base-nativex::git_auth'
 
@@ -37,7 +37,7 @@ node['snowflake-nativex']['git']['snowflake_git_dependency'].each do |build|
 end
 
 # Clone the snowflake project and notify the compile function to package the snowflake project.
-git "#{Chef::Config[:file_cache_path]}/#{node['snowflake']['application_name']}" do
+git "#{Chef::Config[:file_cache_path]}/#{node['snowflake-nativex']['application_name']}" do
   repository node['snowflake-nativex']['git']['snowflake_git_repository_uri']
   revision node['snowflake-nativex']['git']['snowflake_git_repository_branch']
   depth node['snowflake-nativex']['git']['snowflake_git_clone_depth']
@@ -49,7 +49,7 @@ end
 
 # Bash function to compile the snowflake project.
 bash "compile_snowflake_project" do
-  cwd "#{Chef::Config[:file_cache_path]}/#{node['snowflake']['application_name']}"
+  cwd "#{Chef::Config[:file_cache_path]}/#{node['snowflake-nativex']['application_name']}"
   code <<-EOH
     mvn clean package -X
     EOH

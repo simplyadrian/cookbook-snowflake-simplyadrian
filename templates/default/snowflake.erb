@@ -8,16 +8,16 @@
 # description: Starts and Stops and restarts snowflake process.
 #
 
-APP_NAME="<%= node['snowflake']['application_name'] %>"
-APP_HOME="<%= node['snowflake']['snowflake_home'] %>"
-APP_LOG="<%= node['snowflake']['snowflake_log'] %>"
+APP_NAME="<%= node['snowflake-nativex']['application_name'] %>"
+APP_HOME="<%= node['snowflake-nativex']['snowflake_home'] %>"
+APP_LOG="<%= node['snowflake-nativex']['snowflake_log'] %>"
 
 DEBUG_OPTS="<%= node['snowflake-nativex']['java']['debug_opts'] %>"
 GC_OPTS="<%= node['snowflake-nativex']['java']['gc_opts'] %>"
 HEAP_OPTS="<%= node['snowflake-nativex']['java']['heap_opts'] %>"
 JAVA_OPTS="<%= node['snowflake-nativex']['java']['java_opts'] %>"
 JMX_OPTS="<%= node['snowflake-nativex']['java']['jmx_opts'] %>"
-MAIN_CLASS="<%= node['snowflake-nativex']['java']['main-class'] %>"
+MAIN_CLASS="<%= node['snowflake-nativex']['java']['main_class'] %>"
 MAIN_JAR="<%= node['snowflake-nativex']['java']['main_jar'] %>"
 
 CLASSPATH_OPT="$APP_HOME/target/lib/*:$APP_HOME/target/$MAIN_JAR"
