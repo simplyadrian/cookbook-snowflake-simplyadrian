@@ -12,9 +12,9 @@ This file is used to list changes made in each version of the snowflake-nativex 
 	- links the compiled snowflake project to /usr/local/
 	- creates a snowflakerc file to export the snowflake home directory.
 
-0.2.0
+1.0.0
 -----
--[Adrian Herrera]
+-[Adrian Herrera] - Production release of snowflake-nativex
    - adds support for install from source and archive.
    - adds dynamic datacenter and worker id configuration for snowflake project.
    - adds init.d script for stop, start and restart support of application.
