@@ -1,0 +1,64 @@
+#!/bin/sh
+#
+# snowflake    Init script for snowflake
+#
+# chkconfig: 345 99 01
+# processname: snowflake
+# pidfile: var/run/snowflake.pid
+# description: Starts and Stops and restarts snowflake process.
+#
+
+APP_NAME="<%= node['snowflake-nativex']['application_name'] %>"
+APP_HOME="<%= node['snowflake-nativex']['snowflake_home'] %>"
+APP_LOG="<%= node['snowflake-nativex']['snowflake_log'] %>"
+
+DEBUG_OPTS="<%= node['snowflake-nativex']['java']['debug_opts'] %>"
+GC_OPTS="<%= node['snowflake-nativex']['java']['gc_opts'] %>"
+HEAP_OPTS="<%= node['snowflake-nativex']['java']['heap_opts'] %>"
+JAVA_OPTS="<%= node['snowflake-nativex']['java']['java_opts'] %>"
+JMX_OPTS="<%= node['snowflake-nativex']['java']['jmx_opts'] %>"
+MAIN_CLASS="<%= node['snowflake-nativex']['java']['main_class'] %>"
+MAIN_JAR="<%= node['snowflake-nativex']['java']['main_jar'] %>"
+
+CLASSPATH_OPT="$APP_HOME/target/lib/*:$APP_HOME/target/$MAIN_JAR"
+
+PID_PATH_NAME="/var/run/$APP_NAME.pid"
+
+case $1 in
+    start)
+        echo "Starting $APP_NAME ..."
+        if [ ! -f $PID_PATH_NAME ]; then
+            java ${JAVA_OPTS} -cp ${CLASSPATH_OPT} ${MAIN_CLASS} -f ${APP_HOME}/config/config.scala >> /var/log/${APP_LOG} 2>&1 &
+                    echo $! > $PID_PATH_NAME
+            echo "$APP_NAME started ..."
+        else
+            echo "$APP_NAME is already running ..."
+        fi
+    ;;
+    stop)
+        if [ -f $PID_PATH_NAME ]; then
+            PID=$(cat $PID_PATH_NAME);
+            echo "$APP_NAME stoping ..."
+            kill $PID;
+            echo "$APP_NAME stopped ..."
+            rm $PID_PATH_NAME
+        else
+            echo "$APP_NAME is not running ..."
+        fi
+    ;;
+    restart)
+        if [ -f $PID_PATH_NAME ]; then
+            PID=$(cat $PID_PATH_NAME);
+            echo "$APP_NAME stopping ...";
+            kill $PID;
+            echo "$APP_NAME stopped ...";
+            rm $PID_PATH_NAME
+            echo "$APP_NAME starting ..."
+            java ${JAVA_OPTS} -cp ${CLASSPATH_OPT} ${MAIN_CLASS} -f ${APP_HOME}/config/config.scala >> /var/log/${APP_LOG} 2>&1 &
+                    echo $! > $PID_PATH_NAME
+            echo "$APP_NAME started ..."
+        else
+            echo "$APP_NAME is not running ..."
+        fi
+    ;;
+esac 
