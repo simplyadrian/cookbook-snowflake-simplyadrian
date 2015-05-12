@@ -15,7 +15,7 @@ new SnowflakeConfig {
   thriftServerThreads = 2
 
   zookeeperClientConfig = new ZookeeperClientConfig {
-    hostList = "<%= node['snowflake-nativex']['zookeeper']['host_list'] %>"
+    hostList = "<%= node['snowflake-simplyadrian']['zookeeper']['host_list'] %>"
   }
 
   reporterConfig = new ReporterConfig {
@@ -33,7 +33,7 @@ new SnowflakeConfig {
   loggers = new LoggerConfig {
     handlers = new FileHandlerConfig {
       level = Level.TRACE
-      filename = "<%= node['snowflake-nativex']['snowflake_log'] %>"
+      filename = "<%= node['snowflake-simplyadrian']['snowflake_log'] %>"
     }
   }
 }

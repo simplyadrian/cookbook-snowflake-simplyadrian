@@ -1,8 +1,8 @@
 #
-# Cookbook Name:: snowflake-nativex
+# Cookbook Name:: snowflake-simplyadrian
 # Recipe:: configure
 #
-# Copyright 2015, NativeX
+# Copyright 2015, simplyadrian
 #
 # All rights reserved - Do Not Redistribute
 #
@@ -10,10 +10,10 @@
 # Link compiled snowflake project to /usr/local/snowflake
 bash "link_snowflake_project" do
   code <<-EOH
-    ln -s "#{Chef::Config['file_cache_path']}/#{node['snowflake-nativex']['application_name']}" \
-    "#{node['snowflake-nativex']['link']['destination_directory']}/#{node['snowflake-nativex']['application_name']}"
+    ln -s "#{Chef::Config['file_cache_path']}/#{node['snowflake-simplyadrian']['application_name']}" \
+    "#{node['snowflake-simplyadrian']['link']['destination_directory']}/#{node['snowflake-simplyadrian']['application_name']}"
     EOH
-    not_if { ::File.directory?("#{node['snowflake-nativex']['link']['destination_directory']}/#{node['snowflake-nativex']['application_name']}") }
+    not_if { ::File.directory?("#{node['snowflake-simplyadrian']['link']['destination_directory']}/#{node['snowflake-simplyadrian']['application_name']}") }
 end
 
 # Creates a init.d script for snowflake
@@ -26,7 +26,7 @@ end
 db = data_bag_item( 'ids', 'snowflake_id' )
 
 # Create the configuration file for snowflake
-template "#{node['snowflake-nativex']['snowflake_home']}/config/config.scala" do
+template "#{node['snowflake-simplyadrian']['snowflake_home']}/config/config.scala" do
   source 'config.scala.erb'
   mode   '0755'
   variables( 

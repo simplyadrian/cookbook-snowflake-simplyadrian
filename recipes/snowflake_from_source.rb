@@ -1,24 +1,24 @@
 #
-# Cookbook Name:: snowflake-nativex
+# Cookbook Name:: snowflake-simplyadrian
 # Recipe:: snowflake_from_source
 #
-# Copyright 2015, NativeX
+# Copyright 2015, simplyadrian
 #
 # All rights reserved - Do Not Redistribute
 #
 
-node.force_override['snowflake-nativex']['install_method'] = 'source' # ~FC019
+node.force_override['snowflake-simplyadrian']['install_method'] = 'source' # ~FC019
 
-include_recipe 'role-base-nativex::git_auth'
+include_recipe 'role-base-simplyadrian::git_auth'
 
 # Create ssh wraper for github.com authentication
 file "#{Chef::Config[:file_cache_path]}/git_wrapper.sh" do
   mode 00755
-  content "#!/bin/sh\nexec /usr/bin/ssh -i #{node['role-base-nativex']['ssh']['home']}/#{node['role-base-nativex']['ssh']['key_name']} -o 'StrictHostKeyChecking=no' \"$@\""
+  content "#!/bin/sh\nexec /usr/bin/ssh -i #{node['role-base-simplyadrian']['ssh']['home']}/#{node['role-base-simplyadrian']['ssh']['key_name']} -o 'StrictHostKeyChecking=no' \"$@\""
 end
 
 # Clone the snowflake dependencies locally and compile and install
-node['snowflake-nativex']['git']['snowflake_git_dependency'].each do |build|
+node['snowflake-simplyadrian']['git']['snowflake_git_dependency'].each do |build|
   git "#{Chef::Config[:file_cache_path]}/#{build[:name]}"  do
     repository build[:uri]
     revision build[:branch]
@@ -37,10 +37,10 @@ node['snowflake-nativex']['git']['snowflake_git_dependency'].each do |build|
 end
 
 # Clone the snowflake project and notify the compile function to package the snowflake project.
-git "#{Chef::Config[:file_cache_path]}/#{node['snowflake-nativex']['application_name']}" do
-  repository node['snowflake-nativex']['git']['snowflake_git_repository_uri']
-  revision node['snowflake-nativex']['git']['snowflake_git_repository_branch']
-  depth node['snowflake-nativex']['git']['snowflake_git_clone_depth']
+git "#{Chef::Config[:file_cache_path]}/#{node['snowflake-simplyadrian']['application_name']}" do
+  repository node['snowflake-simplyadrian']['git']['snowflake_git_repository_uri']
+  revision node['snowflake-simplyadrian']['git']['snowflake_git_repository_branch']
+  depth node['snowflake-simplyadrian']['git']['snowflake_git_clone_depth']
   action :sync
   ssh_wrapper "#{Chef::Config[:file_cache_path]}/git_wrapper.sh"
   timeout 180
@@ -49,7 +49,7 @@ end
 
 # Bash function to compile the snowflake project.
 bash "compile_snowflake_project" do
-  cwd "#{Chef::Config[:file_cache_path]}/#{node['snowflake-nativex']['application_name']}"
+  cwd "#{Chef::Config[:file_cache_path]}/#{node['snowflake-simplyadrian']['application_name']}"
   code <<-EOH
     mvn clean package -X
     EOH

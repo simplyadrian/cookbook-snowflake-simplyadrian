@@ -1,11 +1,11 @@
-snowflake-nativex CHANGELOG
+snowflake-simplyadrian CHANGELOG
 ===========================
 
-This file is used to list changes made in each version of the snowflake-nativex cookbook.
+This file is used to list changes made in each version of the snowflake-simplyadrian cookbook.
 
 0.1.0
 -----
-- [Adrian Herrera] - Initial release of snowflake-nativex
+- [Adrian Herrera] - Initial release of snowflake-simplyadrian
 	- sets up Maven
 	- sets up git for cloning snowflake project and dependencies locally
 	- clones the snowflake project and dependencies locally and compiles and installs them.
@@ -14,7 +14,7 @@ This file is used to list changes made in each version of the snowflake-nativex 
 
 1.0.0
 -----
--[Adrian Herrera] - Production release of snowflake-nativex
+-[Adrian Herrera] - Production release of snowflake-simplyadrian
    - adds support for install from source and archive.
    - adds dynamic datacenter and worker id configuration for snowflake project.
    - adds init.d script for stop, start and restart support of application.
