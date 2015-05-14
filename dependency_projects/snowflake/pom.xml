@@ -25,7 +25,7 @@
     </pluginRepository>
   </pluginRepositories>
   <parent>
-    <groupId>com.w3i</groupId>
+    <groupId>com.simplyadrian</groupId>
     <artifactId>twitter-scala-parent-overrides</artifactId>
     <version>0.0.1</version>
   </parent>
@@ -78,7 +78,7 @@
       <version>0.8.0</version>
     </dependency>
     <dependency>
-      <groupId>com.w3i.org.apache.scribe</groupId>
+      <groupId>com.simplyadrian.org.apache.scribe</groupId>
       <artifactId>scribe_client</artifactId>
       <version>0.1.12</version>
     </dependency>
